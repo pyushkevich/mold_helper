@@ -165,6 +165,8 @@ if [[ $# -eq 0 ]]; then
   echo "Script Usage:"
   echo "  mold_helper.sh reg_mtl_to_hemi"
   echo "  mold_helper.sh make_reference_mold [SLIT_SPACING]"
+  echo "  mold_helper.sh carve_mold"
+  echo "  mold_helper.sh finish_mold"
   exit 0
 fi
 
