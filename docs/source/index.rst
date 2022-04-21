@@ -11,6 +11,7 @@ Welcome to MoldHelper's documentation!
    :caption: Contents:
 
    about
+   install
    mold7T
    mold94T
 
