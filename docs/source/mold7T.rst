@@ -13,6 +13,8 @@ The required input to this protocol is a 7T MRI scan of the MTL. It should be co
 
 * When selecting the 7T scan, **do not** use the scan with the :code:`_nd` in its name. Those images are saved without on-the-scanner distortion correction and are not suitable for mold making.
 
+.. _mtl7t-seg:
+
 Step 2. Segment the MTL from the Background in ITK-SNAP
 -------------------------------------------------------
 
@@ -52,10 +54,12 @@ Step 2. Segment the MTL from the Background in ITK-SNAP
     
 13. Exit the segmentation mode. You do not need to save the actual segmentation
 
+.. _mtl7t-mold:
+
 Step 3. Create a Reference Mold
 -------------------------------
 
-1. Open a terminal window. Make sure that the directory containing `mold_helper.sh` is in your PATH. You can do this by typing:
+1. Open a terminal window. Make sure that the directory containing :code:`mold_helper.sh` is in your PATH. You can do this by typing:
 
    .. code:: bash
 
@@ -74,7 +78,7 @@ Step 3. Create a Reference Mold
 
       mold_helper.sh make_reference_mold 0.4
 
-4. Running this command will generate an image `reference_mold.nii.gz` in your working folder. Open this image in ITK-SNAP.
+4. Running this command will generate an image :code:`reference_mold.nii.gz` in your working folder. Open this image in ITK-SNAP.
 
 Step 4. Position the Specimen in the Mold
 -----------------------------------------
@@ -85,9 +89,9 @@ In this step, we align the sample in the mold optimally. Optimal alignment takes
 * The specimen should be approximately aligned with the AC/PC axis when sectioned - this means the hippocampus is at about 20 degree angle to the longitudinal axis of the mold
 * The cross-section of the specimen along the cutting direction should fit onto 75x50mm slides. Satidfying this condition may require you to override with the ACPC rule above.
 
-1. Load `reference_mold.nii.gz` as the main image in ITK-SNAP
+1. Load :code:`reference_mold.nii.gz` as the main image in ITK-SNAP
 
-2. Load `mtl7t.nii.gz`` as the overlay image using `File->Add Another Image`. When prompted, select "As a semi-transparent overlay" option.
+2. Load :code:`mtl7t.nii.gz`` as the overlay image using `File->Add Another Image`. When prompted, select "As a semi-transparent overlay" option.
 
 3. Enter registration mode (`Tools->Registration`) and go to the "Manual" tab
 
@@ -136,7 +140,7 @@ In this step, we align the sample in the mold optimally. Optimal alignment takes
 
    .. image:: images/savemat.png
 
-11. Save your workspace (`Workspace->Save Workspace`) as `INDD123456_mold7t.itksnap`
+11. Save your workspace (`Workspace->Save Workspace`) as :code:`INDD123456_mold7t.itksnap`
 
 
 Step 5. Carve the tissue segmentation out of the mold
@@ -152,9 +156,9 @@ Step 5. Carve the tissue segmentation out of the mold
 Step 6. Trim the mold to reduce plastic use
 -------------------------------------------
 
-1. Open `slitmold.nii.gz` in a new ITK-SNAP window
-2. Load `mtl7t.nii.gz` as an additional image
-3. Enter registration mode and use the open icon to load `holderrotation.mat`
+1. Open :code:`slitmold.nii.gz` in a new ITK-SNAP window
+2. Load :code:`mtl7t.nii.gz` as an additional image
+3. Enter registration mode and use the open icon to load :code:`holderrotation.mat`
 4. Draw the trimming polygon at the top of the sample:
    * Use the Crosshairs tool to position the cursor slightly superior to the top of the sample
    * Use the Polygon tool and draw around the tissue but leaving out excess plastic, like shown below. Try to not leave any very thin slivers of plastic as you do this - position the vertices of the polygon inside of the slits. 
@@ -174,7 +178,7 @@ Step 6. Trim the mold to reduce plastic use
   
       .. image:: images/trimpoly3.png
 
-7. Save the segmentation as `cropmask.nii.gz`
+7. Save the segmentation as :code:`cropmask.nii.gz`
 
 8. Run the following command to crop the block:
 
@@ -182,13 +186,13 @@ Step 6. Trim the mold to reduce plastic use
 
       mold_helper.sh finish_mold
 
-   * This should generate files `slitmold.stl` and `sample_inplace_mesh.stl`. These files are huge and need to be simplified before 3D printing.
+   * This should generate files :code:`slitmold.stl` and :code:`sample_inplace_mesh.stl`. These files are huge and need to be simplified before 3D printing.
 
 Step 7. Process meshes in MeshLab
 ---------------------------------
 
 1. You need to download MeshLab for this step. 
-2. Run Meshlab and load `slitmold.stl` using `File->Import Mesh`
+2. Run Meshlab and load :code:`slitmold.stl` using `File->Import Mesh`
 3. Go to `Filters->Remeshing->Quadric Edge Collapse Decimation` and set options as recommended below:
    *  Percentage reduction: 0.1
    *  Preserve boundary: checked
@@ -206,15 +210,14 @@ Step 7. Process meshes in MeshLab
   
       .. image:: images/meshlab2.png
 
-6. Repeat the same process for `sample_inplace_mesh.stl`, however:
+6. Repeat the same process for :code:`sample_inplace_mesh.stl`, however:
    * After loading the mesh, the shading will be wrong. Select `Filters->Normals, Curvatures and Orientation->Invert Faces Orientation` and run that filter after loading the mesh.
 
 Step 8. Visualize sample placement in mold
 ------------------------------------------
-1. Open the meshes `slitmold_reduced.stl` and `sample_inplace_mesh.stl` in ParaView.
+1. Open the meshes :code:`slitmold.stl` and :code:`sample_inplace_mesh.stl` in ParaView.
 2. Adjust the color and transparency of the meshes for good visualization
 3. Take screenshots from a few angles
-
   
       .. image:: images/paraview1.png
   
