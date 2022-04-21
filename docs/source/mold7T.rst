@@ -150,7 +150,7 @@ Step 5. Carve the tissue segmentation out of the mold
 
    .. code:: bash
 
-      mold_helper.sh make_reference_mold 0.4
+      mold_helper.sh carve_mold
 
 
 Step 6. Trim the mold to reduce plastic use
